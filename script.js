@@ -45,21 +45,21 @@ function openBooster() {
 
 
 let i = 0
-const MAX = 10
+const MAX = 11
 
 let go = function() {
 
-        function create() {
+   
         let cardDiv = document.createElement("div")
         cardDiv.className = "pokemon-card"
        
 
         let pokemon = document.createElement("img")
-        let x = 1;
         pokemon.id = i;
         i++
    
-        let num = 1;
+        let num = 0;
+
          if (i == 11) {
              num = randomNum(1, 16)
          }
@@ -72,24 +72,46 @@ let go = function() {
 
         
         document.getElementById("booster-open").appendChild(cardDiv)
-    }
-    create()
-    }
+ 
+        if(i === 10) {
+    setTimeout(go, 2000)
+     }
+       else if(i < 11) {
+    setTimeout(go, 500)
+     }
+     else {
+         clearTimeout(go)
+     }
 
-        function inter() {
-            let timeout 
-
-            if (i === 10) {
-             timeout = setInterval(go(), 6000)    
-             } 
-            else if ( i < MAX)   {
-                timeout = setInterval(go(), 1000);
-            }     
-            else {
-            clearInterval(timeout)
-            }
-            
-        }
+     function reset() {
+         location.reload()
+     }
+     
+     let booster = document.getElementById("booster")
+    booster.addEventListener("click", reset)
+}
 
     let booster = document.getElementById("booster")
-    booster.addEventListener("click", inter)
+    booster.addEventListener("click", go)
+
+
+/*
+let i = 0
+const MAX = 11
+
+
+function createDiv(){
+  const div = document.createElement('div')
+  div.className = 'pit'
+  i++
+
+  const main = document.querySelector('main')
+  main.appendChild(div)
+  
+  if(i === 4)
+    setTimeout(createDiv, 2000)
+  else if(i < MAX)
+    setTimeout(createDiv, 300)
+}
+createDiv()
+*/
